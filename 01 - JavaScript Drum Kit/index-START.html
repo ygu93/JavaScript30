@@ -58,7 +58,26 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  let keys = {'A': 65, 'S':83, 'D':68,'F': 70, 'G':71, 'H':72, 'J': 74, 'K':75, 'L':76}
+  window.addEventListener('keypress', (e)=>{
+    let keyCode = keys[e.key.toUpperCase()]
+    if(keyCode){
+      let audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+      let key = document.querySelector(`div[data-key="${keyCode}"]`);
+      audio.currentTime = 0;
+      audio.play()
+      key.classList.add('playing');
 
+    }
+
+  })
+
+  let audioKeys=Array.from(document.getElementsByClassName('key'));
+  audioKeys.forEach((key) => {
+    key.addEventListener('transitionend', (e)=> {
+      e.target.classList.remove('playing');
+    })
+  })
 </script>
 
 
