@@ -9,13 +9,13 @@
 
   <div class="controls">
     <label for="spacing">Spacing:</label>
-    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px" onMouseMove="changePadding()">
 
     <label for="blur">Blur:</label>
-    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px" onMouseMove="changeBlur()">
 
     <label for="base">Base Color</label>
-    <input id="base" type="color" name="base" value="#ffc600">
+    <input id="base" type="color" name="base" value="#ffc600" onChange="changeColor()">
   </div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
@@ -45,9 +45,33 @@
     input {
       width:100px;
     }
+
+    img{
+      filter:blur(10px);
+      background: #ffc600;
+      padding: 10px;
+    }
+
   </style>
 
   <script>
+    function changeColor() {
+      let color = document.getElementById('base').value;
+      let image = document.getElementsByTagName('IMG')[0];
+      image.style.setProperty("background", `${color}`);
+    }
+
+    function changePadding(){
+      let padding = document.getElementById('spacing').value;
+      let image = document.getElementsByTagName('IMG')[0];
+      image.style.setProperty('padding', `${padding}px`);
+    }
+
+    function changeBlur(){
+      let blur = document.getElementById('blur').value;
+      let image = document.getElementsByTagName('IMG')[0];
+      image.style.setProperty('filter', `blur(${blur}px)`);
+    }
   </script>
 
 </body>
